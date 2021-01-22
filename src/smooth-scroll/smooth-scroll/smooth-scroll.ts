@@ -13,14 +13,14 @@ const SCROLL_TIME = 15000;
  * @param {ISmoothScrollOptions} options
  */
 export function smoothScroll(options: ISmoothScrollOptions): void {
-	const {startTime, startX, startY, endX, endY, method, scroller} = options;
+	const {startTime, startX, startY, endX, endY, method, scroller, scrollTime = SCROLL_TIME} = options;
 
 	let timeLapsed = 0;
 	let start: number | undefined;
 
 	const distanceX = endX - startX;
 	const distanceY = endY - startY;
-	const speed = Math.max(Math.abs((distanceX / 1000) * SCROLL_TIME), Math.abs((distanceY / 1000) * SCROLL_TIME));
+	const speed = Math.max(Math.abs((distanceX / 1000) * scrollTime), Math.abs((distanceY / 1000) * scrollTime));
 
 	// Temporarily disables any scroll snapping that may be active since it fights for control over the scroller with this polyfill
 	let scrollSnapFix: DisableScrollSnapResult | undefined = disableScrollSnap(scroller);

@@ -13,7 +13,7 @@ import {ScrollSnappable} from "../../util/scroll-snappable";
  * @param {ScrollMethodName} kind
  * @returns {ISmoothScrollOptions}
  */
-export function getSmoothScrollOptions(element: Element | Window, x: number, y: number, kind: ScrollMethodName): ISmoothScrollOptions {
+export function getSmoothScrollOptions(element: Element | Window, x: number, y: number, kind: ScrollMethodName, scrollTime: number): ISmoothScrollOptions {
 	const startTime = now();
 
 	if (!(element instanceof Element)) {
@@ -28,7 +28,8 @@ export function getSmoothScrollOptions(element: Element | Window, x: number, y: 
 			endX: Math.floor(kind === "scrollBy" ? startX + x : x),
 			endY: Math.floor(kind === "scrollBy" ? startY + y : y),
 			method: getOriginalScrollMethodForKind("scrollTo", window).bind(window),
-			scroller: getScrollingElement() as ScrollSnappable
+			scroller: getScrollingElement() as ScrollSnappable,
+			scrollTime
 		};
 	} else {
 		const {scrollLeft, scrollTop} = element;
@@ -41,7 +42,8 @@ export function getSmoothScrollOptions(element: Element | Window, x: number, y: 
 			endX: Math.floor(kind === "scrollBy" ? startX + x : x),
 			endY: Math.floor(kind === "scrollBy" ? startY + y : y),
 			method: getOriginalScrollMethodForKind("scrollTo", element).bind(element),
-			scroller: element as ScrollSnappable
+			scroller: element as ScrollSnappable,
+			scrollTime
 		};
 	}
 }

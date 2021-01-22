@@ -30,7 +30,8 @@ function onScrollWithOptions(options: Required<ScrollToOptions>, element: Elemen
 	if (behavior == null || behavior === "auto") {
 		getOriginalScrollMethodForKind(kind, element).call(element, options.left, options.top);
 	} else {
-		smoothScroll(getSmoothScrollOptions(element, options.left, options.top, kind));
+		const scrollTime = options['scrollTime'] as number;
+		smoothScroll(getSmoothScrollOptions(element, options.left, options.top, kind, scrollTime));
 	}
 }
 

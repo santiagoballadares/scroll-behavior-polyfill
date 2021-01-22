@@ -8,4 +8,5 @@ export interface ISmoothScrollOptions {
 	startTime: number;
 	scroller: ScrollSnappable;
 	method(x: number, y: number): void;
+	scrollTime: number;
 }
